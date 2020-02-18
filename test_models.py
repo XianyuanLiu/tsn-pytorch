@@ -20,7 +20,7 @@ parser.add_argument('--modality', type=str, default="RGB")
 # parser.add_argument('--modality', type=str, choices=['RGB', 'Flow', 'RGBDiff'])
 parser.add_argument('--test_list', type=str, default="./list/hmdb51_rgb_test_split_1.txt")
 parser.add_argument('--weights', type=str, default="./model/hmdb51_rgb.pth")
-parser.add_argument('--arch', type=str, default="resnet101")
+parser.add_argument('--arch', type=str, default="BNInception")
 parser.add_argument('--save_scores', type=str, default=None)
 parser.add_argument('--test_segments', type=int, default=25)
 parser.add_argument('--max_num', type=int, default=-1)
@@ -58,9 +58,9 @@ base_dict = {}
 for k, v in checkpoint.items():
     count = count + 1
     print(count, k)
-    if 415>count>18:
+    if 415 > count > 18:
         base_dict.setdefault(k[7:], checkpoint[k])
-    if count<19:
+    if count < 19:
         base_dict.setdefault(k, checkpoint[k])
 base_dict.setdefault('new_fc.weight', checkpoint['base_model.fc-action.1.weight'])
 base_dict.setdefault('new_fc.bias', checkpoint['base_model.fc-action.1.bias'])
